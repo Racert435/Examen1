@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8">
     <link rel="icon" href="./img/Logo scev.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="theme-color" content="#F0DB4F">
     <meta name="MobileOptimized" content="width">
     <meta name="HandheldFriendly" content="true">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -40,18 +39,59 @@
     <title>SCEV</title>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+    <!-- Navbar -->
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <img id="logo" src="./img/lOGOSCEV.jpg" alt="adf"> 
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            
+          <img id="logoauto" src="./img/pngwing.com.png" alt="auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index.html">Vehiculos
+            
+            </a>
+          </li>
+          
+          <li class="nav-item">
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+            <a class="nav-link " href="reporte.html">Reporte</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Ver más
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Sobre nosotros</a></li>
+              <li><a class="dropdown-item" href="#">Ingresa tu ubicacion</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Contactanos</a></li>
+            </ul>
+          </li> 
+        </ul>
+        
+      </div>
+      <form class="d-flex">
+        <input class="form-control me-5" type="search" placeholder="Buscar" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Buscar</button>
+      </form>
+    </div>
+  </nav>
+<!-- Fin del Navbar -->
+    
+    <div id="root">
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+
+      
+    </div>
+
+
+    
+    
   </body>
   <script src="./script.js"></script>
 </html>

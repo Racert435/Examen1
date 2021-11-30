@@ -10,6 +10,10 @@ function App(){
   const [task, setTask ] = useState("")
   const [task1, setTask1 ] = useState("")
   const [task2, setTask2 ] = useState("")
+  const [nombre,setNombre]=useState("")
+  const [año,setAño]=useState("")
+  const [placasA,setPlacasA]=useState("")
+  const [placasB,setPlacasB]=useState("")
   const [tasks, setTasks]=useState([])
   const [editMode,setEditMode]=useState(false)
   const[id,setId]=useState("")
@@ -32,16 +36,20 @@ function App(){
       console.log("Task Vacio")
       return
     }
-    const result=await addDocument("tasks",{name: task, subtitulo: task1, descripcion: task2})
+    const result=await addDocument("tasks",{Correo: task,Nombre:nombre, MarcaVehiculo: task1, Modelo: task2,Año:año,PlacasA:placasA,PlacasB:placasB})
     if(!result.statusResponse){
       setError(result.error)
       return
     }
 
-    setTasks([...tasks, {id:result.data.id, name:task,subtitulo:task1,descripcion:task2}])
+    setTasks([...tasks, {id:result.data.id, Correo:task,Nombre:nombre,MarcaVehiculo:task1,Modelo:task2,Año:año,PlacasA:placasA,PlacasB:placasB}])
     setTask("")
     setTask1("")
     setTask2("")
+    setNombre("")
+    setAño("")
+    setPlacasA("")
+    setPlacasB("")
     setId("")
 
   }
@@ -52,18 +60,22 @@ function App(){
       console.log("Task Vacio")
       return
     }
-    const result=await updateDocument("tasks",id, {name:task,subtitulo:task1,descripcion:task2})
+    const result=await updateDocument("tasks",id, {Correo:task,Nombre:nombre,MarcaVehiculo:task1,Modelo:task2,Año:año,PlacasA:placasA,PlacasB:placasB})
     if(!result.statusResponse){
       setError(result.error)
       return
     }
 
-    const editedTasks=tasks.map(item => item.id === id ? {id, name:task,subtitulo:task1,descripcion:task2}:item)
+    const editedTasks=tasks.map(item => item.id === id ? {id, Correo:task,Nombre:nombre,MarcaVehiculo:task1,Modelo:task2,Año:año,PlacasA:placasA,PlacasB:placasB}:item)
     setTasks(editedTasks)
     setEditMode(false)
     setTask("")
     setTask1("")
     setTask2("")
+    setNombre("")
+    setAño("")
+    setPlacasA("")
+    setPlacasB("")
     setId("")
   }
 
@@ -79,9 +91,13 @@ function App(){
   }
   const editTask=(tarea)=>{
     
-      setTask(tarea.name)
-      setTask1(tarea.subtitulo)
-      setTask2(tarea.descripcion)
+      setTask(tarea.Correo)
+      setNombre(tarea.Nombre)
+      setTask1(tarea.MarcaVehiculo)
+      setTask2(tarea.Modelo)
+      setAño(tarea.Año)
+      setPlacasA(tarea.PlacasA)
+      setPlacasB(tarea.PlacasB)
       setEditMode(true)
       setId(tarea.id)
     
@@ -96,45 +112,6 @@ function App(){
     <>
     
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <img id="logo" src="./img/lOGOSCEV.jpg" alt="adf"/> 
-      
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <img id="logoauto" src="./img/pngwing.com.png" alt="auto"/>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Vehiculos
-            </a>
-          </li>
-         
-          <li class="nav-item">
-            <a class="nav-link" href="reporte.html">Reporte</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Ver más
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Sobre nosotros</a></li>
-              <li><a class="dropdown-item" href="#">Ingresa tu ubicacion</a></li>
-              <li><hr class="dropdown-divider"/></li>
-              <li><a class="dropdown-item" href="#">Contactanos</a></li>
-            </ul>
-          </li> 
-        </ul>
-        
-      </div>
-      <form class="d-flex">
-        <input class="form-control me-5" type="search" placeholder="Buscar" aria-label="Search"/>
-        <button class="btn btn-outline-success" type="submit">Buscar</button>
-      </form>
-    </div>
-  </nav>
-
     <div className="container mt-5">
         <h1>Registro de Automoviles</h1>
         <hr/>
@@ -146,11 +123,15 @@ function App(){
                 <h5 className="text-center">Aun no hay espacios ocupados</h5>
               ):(
                 <ul className="list-group">
-                  {tasks.map((task,task1,task2)=>(
+                  {tasks.map((task)=>(
                     <li className="list-group-item" key={task.id}>
-                      {task.name},
-                      {task.subtitulo},
-                      {task.descripcion}
+                      {task.Correo},
+                      {task.Nombre},
+                      {task.MarcaVehiculo},
+                      {task.Modelo},
+                      {task.Año},
+                      {task.PlacasA},
+                      {task.PlacasB}
                       <button className="btn btn-danger btn-sm float-right mx-2" onClick={()=>deleteTask(task.id)}>Eliminar</button>
                       <button className="btn btn-warning btn-sm float-right" onClick={()=>editTask(task)}>Editar</button>
                     </li>
@@ -164,8 +145,12 @@ function App(){
             <h4 className="text-center">{editMode ? "Modificar tarea" : "Nuevo Auto-Park"} </h4>
             <form onSubmit={editMode ? saveTask:addTask}>
               <input type="text" className="form-control mb-2" placeholder="Ingresa tu correo" onChange={(text)=>setTask(text.target.value)} value={task}/>
-              <input type="text" className="form-control mb-2" placeholder="Ingresa tu nombre completo" onChange={(text)=>setTask1(text.target.value)} value={task1}/>
+              <input type="text" className="form-control mb-2" placeholder="Ingresa tu nombre completo" onChange={(text)=>setNombre(text.target.value)} value={nombre}/>
+              <input type="text" className="form-control mb-2" placeholder="Ingresa Marca del Vehiculo" onChange={(text)=>setTask1(text.target.value)} value={task1}/>
               <input type="text" className="form-control mb-2" placeholder="Ingresa tipo de auto" onChange={(text)=>setTask2(text.target.value)} value={task2}/>
+              <input type="text" className="form-control mb-2" placeholder="Ingresa el año del vehiculo" onChange={(text)=>setAño(text.target.value)} value={año}/>
+              <input type="text" className="form-control mb-2" placeholder="Ingresa las placas del vehiculo" onChange={(text)=>setPlacasA(text.target.value)} value={placasA}/>
+              <input type="text" className="form-control mb-2" placeholder="Ingresa las placas del vehiculo" onChange={(text)=>setPlacasB(text.target.value)} value={placasB}/>
               <button className={editMode ? "btn btn-warning btn-block" : "btn btn-dark btn-block"} type="submit">{editMode ? "Guardar":"Agregar"} </button>
             </form>
           </div>
